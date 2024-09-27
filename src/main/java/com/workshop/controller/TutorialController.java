@@ -2,7 +2,6 @@ package com.workshop.controller;
 
 import com.workshop.models.Tutorial;
 import com.workshop.service.TutorialService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/tutorials")
-@Tag(name = "Tutorials", description = "API for managing the tutorials")
+//@Tag(name = "Tutorials", description = "API for managing the tutorials")
 public class TutorialController {
 
     private final TutorialService tutorialService;
@@ -26,9 +25,9 @@ public class TutorialController {
         List<Tutorial> tutorials = tutorialService.getAllTutotrials();
 
         if (!tutorials.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(tutorials);
+            return new ResponseEntity<>(tutorials, HttpStatus.OK);
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No tutorials found");
+            return new ResponseEntity<>("No tutorials found", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -37,9 +36,9 @@ public class TutorialController {
         Optional<Tutorial> optionalTutorial = tutorialService.getTutotrialById(id);
 
         if (optionalTutorial.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(optionalTutorial.get());
+            return new ResponseEntity<>(optionalTutorial.get(), HttpStatus.OK);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tutorial with id "+id+" not found");
+            return new ResponseEntity<>("Tutorial with id "+id+" not found", HttpStatus.OK);
         }
     }
 
@@ -54,9 +53,9 @@ public class TutorialController {
         List<Tutorial> tutorials = tutorialService.getByPublished();
 
         if (tutorials.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No tutorial found");
+            return new ResponseEntity<>("No tutorial found", HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(tutorials);
+        return new ResponseEntity<>(tutorials, HttpStatus.OK);
     }
 
 }

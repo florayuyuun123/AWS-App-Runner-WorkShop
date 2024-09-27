@@ -1,6 +1,6 @@
 package com.workshop.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tutorials")
