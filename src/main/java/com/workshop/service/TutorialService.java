@@ -1,6 +1,6 @@
 package com.workshop.service;
 
-import com.workshop.TutorialRepository;
+import com.workshop.repository.TutorialRepository;
 import com.workshop.models.Tutorial;
 import org.springframework.stereotype.Service;
 
